@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 // import LoaderButton from "../components/LoaderButton";
@@ -12,8 +12,8 @@ import Button from "react-bootstrap/Button";
 export default function Signup() {
   const [fields, handleFieldChange] = useFormFields({
     email: "",
-    password: "",
-    confirmPassword: "",
+    username:"",
+    password: ""
   });
   const history = useHistory();
   const [newUser, setNewUser] = useState(null);
@@ -21,12 +21,28 @@ export default function Signup() {
   function validateForm() {
     return (
       fields.email.length > 0 &&
-      fields.password.length > 0 &&
-      fields.password === fields.confirmPassword
+      fields.password.length > 0 
+      // fields.password === fields.confirmPassword
+    
     );
   }
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    try{
+      const res = await fetch('http://127.0.0.1:8000/api/register/', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify(fields)
+    
+        })
+      console.log(await res.json());
+    }catch(err){
+      console.log(err)
+    }
+
 
     // setIsLoading(true);
 
@@ -35,7 +51,7 @@ export default function Signup() {
     // setIsLoading(false);
   }
   return (
-    <div className="Login">
+    <div className="Signup">
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="email" size="lg">
           <Form.Label>Email</Form.Label>
@@ -46,20 +62,21 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
+        <Form.Group controlId="username" size="lg">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            autoFocus
+            type="text"
+            value={fields.username}
+            onChange={handleFieldChange}
+          />
+        </Form.Group>
         <Form.Group controlId="password" size="lg">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
             value={fields.password}
             onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="confirmPassword" size="lg">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={handleFieldChange}
-            value={fields.confirmPassword}
           />
         </Form.Group>
         <Button block size="lg" type="submit" disabled={!validateForm()}>
