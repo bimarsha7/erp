@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
@@ -13,13 +13,29 @@ export default function Login() {
       email: "",
       password: ""
     });
-
+    
     function validateForm(){
         return fields.email.length > 0 && fields.password.length > 0;
     }
-    function handleSubmit(event) {
-        event.preventDefault();
-        console.log(fields.email);
+    async function handleSubmit(event) {
+      event.preventDefault();
+        
+      try{
+        const res = await fetch('http://127.0.0.1:8000/api/login/', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-type': 'application/json'
+            },
+            body: JSON.stringify(fields)
+      
+          })
+        console.log(await res.json());
+      }catch(err){
+        console.log(err)
+      }
+  
+        
     }
     return (
         <div className="Login">
