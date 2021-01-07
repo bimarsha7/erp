@@ -14,7 +14,7 @@ class Userlist extends Component {
     
 
     componentDidMount() {
-        let url = "http://127.0.0.1:8000/api/userdetail/?format=json";
+        let url = "http://127.0.0.1:8000/api/profilelist/";
         fetch(url,{
             method:'GET',
             headers:{

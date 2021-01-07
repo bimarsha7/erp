@@ -30,7 +30,7 @@ export const SidebarData = [
   },
   {
     title: 'Salary Report',
-    path: '/profile',
+    path: '/addemployee',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text'
   },

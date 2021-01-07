@@ -27,6 +27,9 @@ export default class Routes extends Component {
           <Route exact path="/profile">
             <AddEmployee />
           </Route>
+          <Route exact path="/addemployee">
+            <AddEmployee />
+          </Route>
           
           
           
