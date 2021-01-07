@@ -4,11 +4,14 @@ import './App.css';
 import Routes from "./Routes";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
+import { useState } from "react";
 
 function App(){
+  
+  
   return (
     <div className="App container py-3">
-      <Navbar collapseOnSelect bg="light" expand="lg" className="mb-3">
+      {/* <Navbar collapseOnSelect bg="light" expand="lg" className="mb-3">
         <LinkContainer to="/">
         <Navbar.Brand href="/" className="font-weight-bold text-muted">
           ERP System
@@ -17,6 +20,10 @@ function App(){
         <Navbar.Toggle/>
       <Navbar.Collapse className="justify-content-end">
         <Nav activeKey={window.location.pathname}>
+          
+        <LinkContainer to="/logout">
+            <Nav.Link>Logout</Nav.Link>
+          </LinkContainer>
           <LinkContainer to="/signup">
             <Nav.Link>Signup</Nav.Link>
           </LinkContainer>
@@ -25,7 +32,8 @@ function App(){
           </LinkContainer>
         </Nav>
       </Navbar.Collapse>
-      </Navbar>
+      </Navbar> */}
+      
       <Routes/>
     </div>
   );

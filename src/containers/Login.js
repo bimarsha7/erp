@@ -4,6 +4,15 @@ import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import { useFormFields } from "../libs/hooksLib"
 import "./Login.css";
+import Navbar from "react-bootstrap/Navbar";
+import { LinkContainer } from "react-router-bootstrap";
+
+import {isAutheticated} from "../Routes"
+import Profile from "./Profile"
+import Dashboard from "../admin/Dashboard"
+import Auth from '../component/auth';
+
+
 
 export default function Login() {
     const history = useHistory();
@@ -31,7 +40,15 @@ export default function Login() {
       
           })
         res = await res.json();
-        history.push("/profile")
+        
+        
+        Auth.login(()=>{
+          localStorage.setItem('access', res.tokens.access)
+          localStorage.setItem('refresh', res.tokens.refresh)
+          history.push("/profile")
+        })
+        
+        // history.push("/profile")
         console.log(res)
       }catch(err){
         console.log(err)
@@ -40,6 +57,13 @@ export default function Login() {
     
     return (
         <div className="Login">
+          {/* <Navbar>
+          <LinkContainer to="/">
+        <Navbar.Brand href="/" className="font-weight-bold text-muted">
+          ERP System
+        </Navbar.Brand>
+        </LinkContainer>
+        </Navbar> */}
           <Form onSubmit={handleSubmit}>
             <Form.Group size="lg" controlId="email">
               <Form.Label>Email</Form.Label>
@@ -58,6 +82,7 @@ export default function Login() {
                 onChange={handleFieldChange}
               />
             </Form.Group>
+            
             <Button block size="lg" type="submit" disabled={!validateForm()}>
               Login
             </Button>
