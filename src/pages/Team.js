@@ -1,11 +1,16 @@
 import React from 'react';
 import Userlist from './Userlist';
+import Navbar from '../components/Navbar';
 
 function Team() {
   return (
+    
     <div className='home'>
-      <h1>Human Resource Management System</h1>
-      <Userlist/>
+       <Userlist/>
+      
+     
+      
+     
     </div>
   );
 }

@@ -3,13 +3,19 @@ import React, { Component } from 'react';
 // // import Button from 'react-bootstrap/Button';
 // import Container from 'react-bootstrap/Container';
 // import Row from 'react-bootstrap/Row';
-
+import {Image} from "react-bootstrap";
+import Navbar from '../components/Navbar';
 class Userlist extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
-            data:false
+            data: []
         }
+    }
+
+    clickMe(data){
+        
+        console.log(data);
     }
     
 
@@ -23,8 +29,10 @@ class Userlist extends Component {
             }
 
 
-        }).then((result)=>{
-            result.json().then((resp)=>{
+        })
+        .then((result)=>{
+            result.json()
+            .then((resp)=>{
             
             this.setState({data:resp})
 
@@ -35,17 +43,28 @@ class Userlist extends Component {
     }
 
     render(){
-        const data =this.state.data;
+        const {data} =this.state;
 
-        console.log(data);
+         console.log(data);
         return(
             <div>
+                < Navbar/>
+                <h1>Our Team</h1>
                 {
                     data ?
-                    <div>
+                    <div style={{columnCount:"3"}}>
                         <ul>
-                            {this.state.data.map(data =>
-                                <li><a href="">{data.username}</a></li>)}
+                            {this.state.data.map((data, index) => (
+                                <li><a href={`/details/${data.id}`}><Image src={data.photo} width='120' height='120'style={{borderRadius: '50%'}}/><br/>
+                                    </a>
+                                    <p>{data.username}</p>
+                                    <p>{data.department}</p>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                 </li>
+                                 ))}
                         </ul>
 
 

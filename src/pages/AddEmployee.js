@@ -152,7 +152,7 @@ handleSubmit = (e) => {
               <p>Documents </p>
               <input file={this.state.document} type="file" name="document"
                 onChange={this.handleFileChange}
-              />
+                multiple/>
               <p>Photo </p>
               <input file={this.state.photo} type="file" name="photo"
                 onChange={this.handleImageChange} 

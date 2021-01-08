@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import Team from './pages/Team';
 import Home from "./pages/Home";
 import AddEmployee from './pages/AddEmployee';
+import Detail from './pages/Detail';
 
 export default class Routes extends Component {
     render() {
@@ -29,6 +30,9 @@ export default class Routes extends Component {
           </Route>
           <Route exact path="/addemployee">
             <AddEmployee />
+          </Route>
+          <Route exact path="/details/:id" component={Detail}>
+            {/* <Detail name="samman"/> */}
           </Route>
           
           
